@@ -6,44 +6,9 @@ function salvar() {
     localStorage.setItem("historico", JSON.stringify(historico));
 }
 
-function atualizarTabela() {
-    const tbody = document.querySelector("#tabelaEstoque tbody");
-    const select = document.getElementById("epiSelect");
-
-    tbody.innerHTML = "";
-    select.innerHTML = "";
-
-    for (let epi in estoque) {
-        tbody.innerHTML += `<tr>
-            <td>${epi}</td>
-            <td>${estoque[epi]}</td>
-        </tr>`;
-
-        select.innerHTML += `<option value="${epi}">${epi}</option>`;
-    }
-
-    atualizarHistorico();
-}
-
-function atualizarHistorico() {
-    const tbody = document.querySelector("#tabelaHistorico tbody");
-    tbody.innerHTML = "";
-
-    historico.forEach(h => {
-        tbody.innerHTML += `
-        <tr>
-            <td>${h.data}</td>
-            <td>${h.nome}</td>
-            <td>${h.matricula}</td>
-            <td>${h.setor}</td>
-            <td>${h.epi}</td>
-            <td>${h.qtd}</td>
-        </tr>`;
-    });
-}
-
+/* ---------- ENTRADA ---------- */
 function adicionarEstoque() {
-    const nome = document.getElementById("epiNome").value;
+    const nome = document.getElementById("epiNome").value.trim();
     const qtd = parseInt(document.getElementById("epiQtd").value);
 
     if (!nome || !qtd) return alert("Preencha os campos");
@@ -51,9 +16,24 @@ function adicionarEstoque() {
     estoque[nome] = (estoque[nome] || 0) + qtd;
 
     salvar();
-    atualizarTabela();
+    alert("Adicionado com sucesso!");
+    document.getElementById("epiNome").value = "";
+    document.getElementById("epiQtd").value = "";
 }
 
+/* ---------- SELECT EPIs ---------- */
+function carregarEPIs() {
+    const select = document.getElementById("epiSelect");
+    if (!select) return;
+
+    select.innerHTML = "";
+
+    for (let epi in estoque) {
+        select.innerHTML += `<option value="${epi}">${epi} ( ${estoque[epi]} )</option>`;
+    }
+}
+
+/* ---------- RETIRADA ---------- */
 function retirarEPI() {
     const nome = document.getElementById("nome").value;
     const matricula = document.getElementById("matricula").value;
@@ -79,7 +59,35 @@ function retirarEPI() {
     });
 
     salvar();
-    atualizarTabela();
+    alert("Retirada registrada!");
 }
 
-atualizarTabela();
+/* ---------- CONTROLE ---------- */
+function atualizarTabela() {
+    const tbody = document.querySelector("#tabelaEstoque tbody");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    for (let epi in estoque) {
+        tbody.innerHTML += `<tr>
+            <td>${epi}</td>
+            <td>${estoque[epi]}</td>
+        </tr>`;
+    }
+
+    const hist = document.querySelector("#tabelaHistorico tbody");
+    hist.innerHTML = "";
+
+    historico.forEach(h => {
+        hist.innerHTML += `
+        <tr>
+            <td>${h.data}</td>
+            <td>${h.nome}</td>
+            <td>${h.matricula}</td>
+            <td>${h.setor}</td>
+            <td>${h.epi}</td>
+            <td>${h.qtd}</td>
+        </tr>`;
+    });
+}
