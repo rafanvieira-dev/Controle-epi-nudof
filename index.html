@@ -3,69 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Controle de EPI - NUDOF</title>
+<title>NUDOF - Controle de EPI</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="menu">
 
-<h1>Controle de EPI - NUDOF</h1>
+<h1>NUDOF - Controle de EPI</h1>
 
-<div class="container">
-
-    <!-- ENTRADA -->
-    <div class="card">
-        <h2>Entrada de EPI</h2>
-
-        <input type="text" id="epiNome" placeholder="Nome do EPI">
-        <input type="number" id="epiQtd" placeholder="Quantidade">
-
-        <button onclick="adicionarEstoque()">Adicionar ao estoque</button>
-    </div>
-
-
-    <!-- RETIRADA -->
-    <div class="card">
-        <h2>Retirada de EPI</h2>
-
-        <input type="text" id="nome" placeholder="Nome do servidor">
-        <input type="text" id="matricula" placeholder="Matrícula">
-        <input type="text" id="setor" placeholder="Setor">
-
-        <select id="epiSelect"></select>
-
-        <input type="number" id="retiradaQtd" placeholder="Quantidade">
-
-        <button onclick="retirarEPI()">Registrar retirada</button>
-    </div>
-
+<div class="menu-box">
+    <a href="entrada.html" class="menu-btn">📦 Entrada de Material</a>
+    <a href="retirada.html" class="menu-btn">🧾 Retirada</a>
+    <a href="controle.html" class="menu-btn">📊 Controle</a>
 </div>
 
-<h2>Estoque Atual</h2>
-<table id="tabelaEstoque">
-    <thead>
-        <tr>
-            <th>EPI</th>
-            <th>Quantidade</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-
-<h2>Histórico</h2>
-<table id="tabelaHistorico">
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Setor</th>
-            <th>EPI</th>
-            <th>Qtd</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-
-<script src="script.js"></script>
 </body>
 </html>
