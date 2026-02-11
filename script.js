@@ -91,3 +91,13 @@ function atualizarTabela() {
         </tr>`;
     });
 }
+/* ---------- BUSCA ---------- */
+function filtrarHistorico() {
+    const termo = document.getElementById("busca").value.toLowerCase();
+    const linhas = document.querySelectorAll("#tabelaHistorico tbody tr");
+
+    linhas.forEach(linha => {
+        const texto = linha.innerText.toLowerCase();
+        linha.style.display = texto.includes(termo) ? "" : "none";
+    });
+}
